@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'Didact Gothic';
+  src: url('/fonts/didact-gothic/webfonts/didact-gothic-latin-400-normal.woff2') format('woff2'), url('/fonts/didact-gothic/webfonts/didact-gothic-latin-400-normal.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+body {
+  background-image: linear-gradient(to right, var(--color-gray-light) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-gray-light) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  font-family: var(--ff-body);
+}
+
+main {
+  isolation: isolate;
+  margin-inline: auto;
+  padding-inline: var(--space-l);
+  position: relative;
+}
+
+.intersection {
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: transparent;
+  z-index: -1;
+  display: none;
+
+  @media screen and (width > 56.25rem) {
+    display: block;
+  }
+}
+
+.top.left {
+  left: -3rem;
+  top: -2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0rem;
+    left: -2rem;
+    block-size: 1px;
+    inline-size: 8rem;
+    background-image: linear-gradient(to right, var(--color-gray-dark) 65%, hsl(0 0 65%) 5%);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2rem;
+    left: 0rem;
+    inline-size: 1px;
+    block-size: 8rem;
+    background-image: linear-gradient(to right, var(--color-gray-dark) 65%, hsl(0 0 65%) 5%);
+  }
+}
+
+.bottom.right {
+  right: -3rem;
+  bottom: -2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0rem;
+    right: -2rem;
+    block-size: 1px;
+    inline-size: 8rem;
+    background-image: linear-gradient(to right, var(--color-gray-dark) 65%, hsl(0 0 65%) 5%);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2rem;
+    right: 0rem;
+    inline-size: 1px;
+    block-size: 8rem;
+    background-image: linear-gradient(to right, var(--color-gray-dark) 65%, hsl(0 0 65%) 5%);
+  }
+
+}
+
+code:not(pre code) {
+  background-color: var(--color-gray-light);
+  border-radius: 4px;
+  color: hsl(0 0 35%);
+  padding: 2px 5px;
+}
+
+pre {
+  border-radius: 4px;
+  padding: var(--space-m);
+}
+
+td, th {
+  border-bottom: 1px solid var(--color-gray-dark);
+  padding: var(--space-s);
+  text-align: start;
+}
+
+hr {
+  border: .2px dotted var(--color-gray-dark);
+}

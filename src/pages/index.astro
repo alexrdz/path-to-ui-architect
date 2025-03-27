@@ -1,49 +1,53 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<MainLayout>
+  <h1 id="welcome-to-site-name-or-just-my-path-to-ui-architecture-">¡Hola y bienvenida!</h1>
+<p>This is my personal learning journal and study reference as I seek to level up from a frontend developer to a system-oriented, architecture-driven engineer.</p>
+<hr>
+<h2 id="why-i-built-this">Why I Built This</h2>
+<p>I built this site because I wanted more than bookmarks and saved tweets.</p>
+<p>I wanted a structured, evolving system to help me learn, reflect, and improve as a frontend engineer — particularly in the areas of component architecture, design systems, refactoring, and modern JavaScript/Vue practices.</p>
+<hr>
+<h2 id="what-you-ll-find-here">What You’ll Find Here</h2>
+
+<ul data-stack data-gap="m">
+  <li data-split data-split-1-4>
+    <strong>Foundations</strong>
+    <span>Mental models, best practices, and system-level thinking</span>
+  </li>
+  <li data-split data-split-1-4>
+    <strong>Component Architecture</strong>
+    <span>Refactoring strategies, Vue idioms, clean patterns</span>
+  </li>
+  <li data-split data-split-1-4>
+    <strong>Design System Theory</strong>
+    <span>From tokens to layout primitives</span>
+  </li>
+  <li data-split data-split-1-4>
+    <strong>Reference</strong>
+    <span>Quick access to best practices and reusable ideas</span>
+  </li>
+  <li data-split data-split-1-4>
+    <strong>Thoughts &amp; Logs</strong>
+    <span>Blog posts, rants, revelations, and learning wins</span>
+  </li>
+</ul>
+
+<hr>
+<h2 id="who-this-is-for">Who This Is For</h2>
+<p>Mainly for myself — but also for anyone who’s walking a similar path:  </p>
+<ul data-stack data-gap="m">
+<li>Engineers trying to write cleaner components  </li>
+<li>Designers becoming system thinkers  </li>
+<li>Seniors leveling up into architectural roles  </li>
+<li>Curious devs who like structured thought</li>
+</ul>
+<hr>
+<h2 id="the-journey-so-far-">The Journey (So Far)</h2>
+<p>I’m organizing this into major categories that represent “landmarks” on the path. You can follow them linearly or jump around.</p>
+<p><a href="#">→ See the Roadmap</a><br><a href="#">→ Browse the Blog</a></p>
+<hr>
+
+</MainLayout>

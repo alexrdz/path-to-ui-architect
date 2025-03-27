@@ -1,0 +1,35 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+    <main data-stack data-gap="m">
+      <slot />
+    </main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+  main {
+    max-inline-size: 50rem;
+    margin-inline: auto;
+    margin-block: var(--space-2xl);
+  }
+</style>

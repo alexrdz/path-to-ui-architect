@@ -1,20 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
 
 // Get the slug from the URL
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('vue-idioms');
+
   return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
+
+
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost post={post}>
+<MainLayout title={post.data.title} description={post.data.description}>
   <Content />
-</BlogPost>
+</MainLayout>
