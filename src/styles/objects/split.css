@@ -3,9 +3,10 @@
   --split-align: initial;
   --largest-width: calc(100% - max(0rem, var(--gap, 0rem)));
   --split-min-width: initial;
+  --collapse-at: 40rem;
 
   --collapse: calc(var(--collapse-at) - var(--gap, 0rem));
-  align-items: var(--split-align);
+  align-items: var(--split-align, start);
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap, 0rem);
