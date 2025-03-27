@@ -40,7 +40,7 @@ Whether it's leveling up junior devs, clarifying confusing systems for PMs, or u
 
 ## A Real Example: From Mess to Maintainable
 
-I once picked up a bug ticket that stemmed from a feature PR. The original issue was simple: when navigating to a user’s profile from the Pulse feed and then clicking “Back,” users were returned to the top of the page instead of their scroll position.
+I once picked up a bug ticket that stemmed from a feature PR. The original issue was simple: when navigating to a user’s profile from a news feed and then clicking “Back,” users were either not returned to the original page or there was no back button available because the code was not handling the navigation and navigation state correctly.
 
 The implementation was… rough.
 
@@ -48,15 +48,14 @@ Routing logic, state flags, and scroll behavior were all tangled inside a Vue co
 
 I could have patched it.
 
-Instead, I stepped back and asked, “Where should this logic *really* live?”
+Instead, I stepped back and asked, "What is the desired behavior?" and "Where should this logic *really* live?"
 
-I deleted it.
+This helped me understand the real issue rather than focusing on trying to make the existing code work.
 
-Rebuilt the logic inside a `beforeEnter` route guard using a composable.
-Passed only the minimal data needed to the component via `meta` props.
-Kept the UI code clean, focused only on rendering.
+I deleted it and rebuilt the logic inside a `beforeEnter` route guard using a composable.
+I passed only the minimal data needed to the component via `meta` props. This kept the UI code clean, focused only on rendering.
 
-That’s the difference. **Architects zoom out.** They don't ask “How do I fix this?” but "Where is the issue stemming from?" and “Where does this belong in the system?”
+That’s the difference. **Architects zoom out.** They don't ask “How do I fix this?” but "Why is it not working with the current solution/code?", "Where is the issue stemming from?" and “Where does this belong in the system?”
 
 ---
 
