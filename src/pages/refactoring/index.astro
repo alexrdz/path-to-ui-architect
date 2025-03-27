@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const posts = await getCollection('refactoring');
+---
+
+<MainLayout title="Refactoring">
+  <h1>Refactoring</h1>
+  <ul>
+    {posts.map(post => (
+      <li>
+        <a href={`/refactoring/${post.slug}`}>
+          {post.data.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</MainLayout>
