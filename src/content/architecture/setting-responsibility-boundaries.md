@@ -1,14 +1,15 @@
 ---
 title: 'Setting Responsibility Boundaries'
 description: 'Using function naming to align with code responsibility'
-publishDate: 2024-03-26
-author: 'alexrdz'
+category: "architecture"
+order: 1
 tags: ["component-design", "code-responsibility", "single-responsibility"]
 ---
 
 ## Setting Responsibility Boundaries
 
 ### Why is this important?
+
 Let's talk about setting responsibility boundaries for our code. What exactly does this mean? Well, I think looking at some code will help. Let's mix things up a bit... for this example, we'll take a look at a React component.
 
 ```tsx
