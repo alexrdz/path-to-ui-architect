@@ -1,19 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
 
 const posts = await getCollection('testing');
 ---
 
 <MainLayout title="Testing">
   <h1>Testing</h1>
-  <ul>
-    {posts.map(post => (
-      <li>
-        <a href={`/testing/${post.slug}`}>
-          {post.data.title}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <ArticleList posts={posts} collectionName="testing" />
 </MainLayout>

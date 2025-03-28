@@ -1,19 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
 
 const posts = await getCollection('composables');
 ---
 
 <MainLayout title="Composables">
   <h1>Composables</h1>
-  <ul>
-    {posts.map(post => (
-      <li>
-        <a href={`/composables/${post.slug}`}>
-          {post.data.title}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <ArticleList posts={posts} collectionName="composables" />
 </MainLayout>

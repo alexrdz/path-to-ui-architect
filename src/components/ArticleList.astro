@@ -1,0 +1,31 @@
+---
+interface Post {
+  slug: string;
+  data: {
+    title: string;
+  };
+}
+
+interface Props {
+  posts: Post[];
+  collectionName: string;
+}
+
+const { posts, collectionName } = Astro.props as Props;
+const hasPosts = posts.length > 0;
+---
+
+  {
+    !hasPosts ? (
+      <p>No posts yet...</p>
+    ) : (
+      <ul data-stack data-gap="s">
+        {posts.map((post: Post) => (
+      <li>
+        <a href={`/${collectionName}/${post.slug}`}>
+          {post.data.title}
+        </a>
+      </li>
+      ))}
+  </ul>
+)

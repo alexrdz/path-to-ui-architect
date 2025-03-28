@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) =>
@@ -9,13 +10,5 @@ const sortedPosts = posts.sort((a, b) =>
 ---
 <MainLayout title="Blog">
   <h1>Blog Posts</h1>
-  <ul>
-    {sortedPosts.map(post => (
-      <li>
-        <a href={`/blog/${post.slug}`}>
-          {post.data.title}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <ArticleList posts={sortedPosts} collectionName="blog" />
 </MainLayout>

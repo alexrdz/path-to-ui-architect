@@ -4,11 +4,15 @@ const today = new Date();
 
 <footer data-stack data-gap="m">
   <hr />
-  <p>&copy; {today.getFullYear()} Your name here. All rights reserved.</p>
+  <p data-cluster data-justify="center" data-gap="s">
+    <span class="copyleft">&copy;</span>
+    <span>{today.getFullYear()} alexrdz. All rights reserved.</span>
+  </p>
   <p>
     Created with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.
     Content written in <a href="https://www.typora.io/" target="_blank" rel="noopener noreferrer">Typora</a>.
   </p>
+
 </footer>
 <style>
 	footer {
