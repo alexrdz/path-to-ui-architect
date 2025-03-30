@@ -19,7 +19,7 @@ import { defineCollection, z } from 'astro:content';
 const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
-    publishDate: z.coerce.date(), // Using coerce.date() for more flexible date parsing
+    publishDate: z.string(),
     description: z.string(),
     author: z.string(),
     tags: z.array(z.string()).optional(),

@@ -5,3 +5,4 @@
 @import "./objects/index.css" layer(objects);
 @import "./objects/attrs.css" layer(objects);
 @import "./app.css" layer(app);
+@import './lite-yt-embed.css' layer(vendor);

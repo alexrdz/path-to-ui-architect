@@ -5,10 +5,31 @@ import MainLayout from '../../layouts/MainLayout.astro';
 // Get the slug from the URL
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+
   return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },
   }));
+}
+
+function formatDate(dateString: string) {
+  // Split the date string into separate parts (month, day, year)
+  const parts = dateString.split("-");
+
+  // Create a Date object from the parts
+  const date = new Date(parseInt(parts[2], 10), parseInt(parts[0]) - 1, parseInt(parts[1]));
+
+  // Use the Intl.DateTimeFormat object for formatting
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  // Format the date according to the specified options
+  const formattedDate = formatter.format(date);
+  return formattedDate;
 }
 
 const { post } = Astro.props;
@@ -17,4 +38,9 @@ const { Content } = await post.render();
 
 <MainLayout title={post.data.title} description={post.data.description}>
   <Content />
+  <hr>
+  <p>
+    <small>posted {formatDate(post.data.publishDate)}</small>
+    <span data-cluster data-gap="s">tags: {post.data.tags?.map((tag: string) => <a href={`/tags/${tag}`}>{tag}</a>)}</span>
+  </p>
 </MainLayout>

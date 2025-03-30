@@ -9,27 +9,29 @@ tags: ["mindset", "terminology", "glossary"]
 ## Glossary of Terms
 
 <details>
-  <summary>
-    <a name="orchestration" id="orchestration"></a> Orchestration
-  </summary>
+  <summary><a name="orchestration" id="orchestration"></a> Orchestration</summary>
 
-  > Orchestration is the coordination of multiple pieces of logic, data, or state into a meaningful flow.
-  In a frontend app, orchestration usually involves:
-  - Calling services (APIs)
-  - Reacting to user input
-  - Updating state
-  - Handling loading, success, and error cases
-  - Managing side effects (navigation, notifications, logging, etc)
-  #### Why it’s called orchestration:
-  I am huge music fan, so it helps me think of orchestration as an actual orchestra. Each instrument (API, store, component) does its job independently. But the conductor coordinates when and how each one plays to produce a meaningful whole.
+Orchestration is the coordination of multiple pieces of logic, data, or state into a meaningful flow. In a frontend app, orchestration usually involves:
 
-  The orchestration layer is that conductor.
+- Calling services (APIs)
+- Reacting to user input
+- Updating state
+- Handling loading, success, and error cases
+- Managing side effects (navigation, notifications, logging, etc)
 
-  #### What orchestration isn't:
-  Orchestration is not business logic or pure rendering logic. It doesn’t own the rules, and it doesn’t draw anything. It just coordinates what happens when.
+#### Why it’s called orchestration:
 
-  #### In summary
-  > "Orchestration" = logic that coordinates events, side effects, and flows, usually wrapped in a custom hook or service.
+I am huge music fan, so it helps me think of orchestration as an actual orchestra. Each instrument (API, store, component) does its job independently. But the conductor coordinates when and how each one plays to produce a meaningful whole.
+
+The orchestration layer is that conductor.
+
+#### What orchestration isn't:
+
+Orchestration is not business logic or pure rendering logic. It doesn’t own the rules, and it doesn’t draw anything. It just coordinates what happens when.
+
+#### In summary
+
+> "Orchestration": logic that coordinates events, side effects, and flows, usually wrapped in a custom hook or service.
 </details>
 
 <details>
