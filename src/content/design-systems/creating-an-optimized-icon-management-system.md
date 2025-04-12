@@ -6,7 +6,7 @@ order: 1
 tags: ['icon-management', 'svg-sprites', 'vuejs']
 ---
 
-As I dive deeper into building out our design system I keep running into some really fun problems to solve. Recently, icons became one of these exciting challenges. This marked my first real impactful decision for a team. So I put quite a bit of effort into this. But first, a little background.
+As I dive deeper into building out our design system I keep running into some really fun problems to solve. Recently, icons became one of these exciting challenges. This was my first major architectural decision. So I put quite a bit of effort into this. But first, a little background.
 
 Our team relied on Fort Awesome to generate our icon font. It served us well, but we knew we wanted a different direction going forward. And with the recent announcement that Fort Awesome is shutting down, we needed to re-evaluate our icon strategy immediately. We needed to find a new approach—one that was robust, scalable, and maintainable for the future of our design system.
 
@@ -14,7 +14,7 @@ This post is about that process. I'll walk you through the two main solutions we
 
 Admittedly, I had never considered icon management for two reasons:
 
-1. in my peronal projects, I've never needed more than 5 icons. So creating single purpose icon components like `IconSkull.astro` or `IconPlay.tsx` or even `icon_pause.php` was quick and easy.
+1. in my personal projects, I've never needed more than 5 icons. So creating single purpose icon components like `IconSkull.astro` or `IconPlay.tsx` or even `icon_pause.php` was quick and easy.
 2. in every job I've had, an icon solution was already in place.
 
 But the issue came to the forefront quite quickly. Our specific situation involved Fort Awesome, which had been the established icon solution since I joined the company. While it fulfilled its basic purpose for a considerable time, there was an understanding within the team that we might benefit from a different, more integrated strategy in the long run. But it never became a priority. The impending shutdown of Fort Awesome served as the necessary catalyst, thankfully, accelerating our timeline to investigate and implement a more robust, future-proof approach tailored to our Vue.js environment and design system goals.
@@ -98,7 +98,7 @@ In comparison with the CSS approach, this is arguably better.
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | - adding new icons is easier via updating the sprite<br />-  an automation script (python or node) can generate the sprite from individual SVGS - this also fits our workflow as our designer generates individual SVGS from Figma<br />- designer to developer hand-off is automated | - requires initial tooling to be written<br />- architecture can be more complex than the CSS solution |
 
-I like the idea of automated hand-off, and we could probably add the sprite generation into our build script or as part of the design system's publishing workflow. But I think more consideration and quetioning is needed in terms of scalability. Are we expecting to handle more than just icons? Are we considering a limit to how many icons we should handle for our design system? How do we see the icon system growing and what impact would that have on our automation scripts? Will updating and scaling the scripts be trivial, tricky? This is a tie for me. I like the idea a lot but there are too many unknowns.
+I like the idea of automated hand-off, and we could probably add the sprite generation into our build script or as part of the design system's publishing workflow. But I think more consideration and questioning is needed in terms of scalability. Are we expecting to handle more than just icons? Are we considering a limit to how many icons we should handle for our design system? How do we see the icon system growing and what impact would that have on our automation scripts? Will updating and scaling the scripts be trivial, tricky? This is a tie for me. I like the idea a lot but there are too many unknowns.
 
 
 
@@ -106,9 +106,9 @@ I like the idea of automated hand-off, and we could probably add the sprite gene
 
 | Pros                                                         | Cons                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| - icon design and SVG generation handled by designer in their tool of preferance (Figma)<br />- individual SVG files makes for easy maintenance or even individually versioned<br />- simple and easy to add/edit/remove icons<br />- allows for better component-based approach in Vue (or any framework)<br />- supports dynamic styling, animating | - potential for over-engineering<br />- requires more understanding of the icon system than switching classes <br />- requires extensive and updated documentation to ensure proper maintenance is provided |
+| - icon design and SVG generation handled by designer in their tool of preference (Figma)<br />- individual SVG files makes for easy maintenance or even individually versioned<br />- simple and easy to add/edit/remove icons<br />- allows for better component-based approach in Vue (or any framework)<br />- supports dynamic styling, animating | - potential for over-engineering<br />- requires more understanding of the icon system than switching classes <br />- requires extensive and updated documentation to ensure proper maintenance is provided |
 
-I'm going to hand it to the **Pros** here. I'm weary of the potential for over-engineering but goig in with that on our minds might help us all keep each other in check and ensure we are keeping it as simple and easy as possible. Some complexity may be required but we can assess that through spikes and discussions. And it could be used as a good example or model of how to write more modular and scalable systems and components.
+I'm going to hand it to the **Pros** here. I'm weary of the potential for over-engineering but goig in with that might help us all keep each other in check and ensure we are keeping it as simple and easy as possible. Some complexity may be required but we can assess that through spikes and discussions. And it could be used as a good example or model of how to write more modular and scalable systems and components.
 
 I'm sure it's quite evident I have a bias for the SVG Sprite approach. And yes, that was my proposal. But how would I implement this? Let's give it a shot.
 
@@ -128,7 +128,7 @@ That looks pretty good to me. And it's a component, so we can add as many props 
 
 So now I've identified three (3) props, `name`, `size`, and `variant`. I can see from here that I can probably use at least 2 union types or Enums and a string. Perfect, this gives me a good place to start writing out my component with its props, not thinking about state, or any events or methods at the moment. Ideally, we won't have any in this component. One of our goals is to keep simple and easy to manage.
 
-**Writing out or component**
+**Writing out our component**
 
 ```vue
 <template>
@@ -204,7 +204,7 @@ Then we have our props interface declaration. This ensures we have the proper ty
 
 Computed values are the actual value that is derived from the props. Basically, making these computed allows them to be tracked by Vue's reactivity system allowing re-renders of the component when the dependency values in our computed properties change.
 
-Now that we've addressed our props and added types to our component, it's time to write our icon markup. Rembmering that we are using SVG sprites, this is where they shine when mixed with component architecture:
+Now that we've addressed our props and added types to our component, it's time to write our icon markup. Remembering that we are using SVG sprites, this is where they shine when mixed with component architecture:
 
 ```vue
 <template>
@@ -258,7 +258,7 @@ And this is what is rendered in our DOM:
 
 As I mentioned, our SVG sprite can be injected or written into the DOM. Which brings us to our last step:
 
-### Writing our sprite to our DOM
+### Injecting our sprite to our DOM
 
 Our designer currently exports SVGs into their own files inside a particular directory. We'll need an intermediary step to generate the sprite file, which is out of scope for this post. Ultimately, we will end up with a `sprite.svg` file in our `public` directory of our app. So that let's us access it programatically and append it to our DOM using the power of composables.
 
@@ -370,9 +370,11 @@ Navigating the transition away from Fort Awesome forced us to deeply consider th
 
 As detailed, we weighed the pros and cons of embedding SVGs in CSS versus leveraging SVG sprites. While the CSS approach offered initial simplicity, the SVG sprite method ultimately won out due to its significant advantages in caching performance, accessibility compliance, styling flexibility, and long-term scalability and maintainability – aligning perfectly with the goals I set out. The implementation, centered around the `BaseIcon` component and the `useSvgLoader` composable, provides a developer-friendly API while handling the complexities of sprite injection efficiently.
 
-This process was a significant learning experience for me, marking a key step in contributing to our design system's architecture. If you're building a design system, managing a large icon set, or facing a similar migration, I highly recommend evaluating the SVG sprite approach. It offers a powerful and modern way to handle iconography.
+This process was a significant learning experience for me, marking a key step in contributing to our design system's architecture. This wasn’t just an icon migration — it was a turning point in how we think about design systems, developer experience, and sustainable architecture. SVG sprites gave us a scalable, accessible, and elegant foundation — and building it helped me grow as a UI architect.
 
-What are your experiences with icon management? Have you used SVG sprites, or do you prefer a different method? I'd love to hear your thoughts, questions, or alternative solutions in the comments below!
+What are your experiences with icon management? Have you used SVG sprites, or do you prefer a different method? I'd love to hear your thoughts, questions, or alternative solutions. email me at drinkhorchata [at] duck.com or bluesky @alexrdz.bsky.social
+
+
 
 ---
 #### Abrazado a ti by Kevin Kaarl
