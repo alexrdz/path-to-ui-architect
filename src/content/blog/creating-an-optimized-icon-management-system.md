@@ -139,20 +139,20 @@ So now I've identified three (3) props, `name`, `size`, and `variant`. I can see
 <script setup lang="ts">
   import { computed } from 'vue';
 
-	// setup union types for `size` and `variant`
+// setup union types for `size` and `variant`
   type IconSize = 'xs' | 's' | 'm' | 'l' | 'xl';
-	type IconVariant = 'info' | 'danger' | 'success' | 'warning';
+  type IconVariant = 'info' | 'danger' | 'success' | 'warning';
 
-	// setup the props interface
+// setup the props interface
   interface Props {
     name: string; // required, "icon-star"
     size?: IconSize;
     variant?: IconVariant;
     className?: string;
     attrs?: Record<string, any>;
-	}
+  }
 
-	// setup props with defaults
+// setup props with defaults
   const props = withDefaults(defineProps<Props>(), {
     size: 'm',
     variant: 'info',
@@ -160,7 +160,7 @@ So now I've identified three (3) props, `name`, `size`, and `variant`. I can see
     attrs: () => ({}),
   });
 
-  // create a map for sizes - mapping type to value
+// create a map for sizes - mapping type to value
   const sizeMap: Record<IconSize, number> = {
     xs: 16,
     s: 24,
@@ -169,20 +169,20 @@ So now I've identified three (3) props, `name`, `size`, and `variant`. I can see
     xl: 64,
   };
 
-  // map for variants - mapping type to value
-	const variantMap: Record<IconVariant, string> = {
+// map for variants - mapping type to value
+  const variantMap: Record<IconVariant, string> = {
     info: 'info',
     danger: 'danger',
     success: 'success',
     warning: 'warning',
   };
 
-  // computed value to re-render the component when size prop changes
+// computed value to re-render the component when size prop changes
   const computedSize = computed<number>(() => {
     return sizeMap[props.size];
   });
 
-  // computed value to re-render the component when variant prop changes
+// computed value to re-render the component when variant prop changes
   const computedVariant = computed<string>(() => {
     return variantMap[props.variant];
   });
@@ -200,7 +200,7 @@ So now I've identified three (3) props, `name`, `size`, and `variant`. I can see
 </script>
 ```
 
-Ok, that's a lot of code for three (3) props isn't it? While it may seem like a lot, most of it is config. Let's start with the first two types. These are just safeguards to limit the props we can use with this component.
+Ok, that's a lot of code for three (3) props isn't it? While it may seem like a lot, most of it is config. Let's start with the first two types. These are just safeguards to limit the prop values we can use with this component.
 
 Then we have our props interface declaration. This ensures we have the proper types attached to each prop.
 
@@ -255,14 +255,16 @@ So when we use this component in our app, our usage is pretty much what we start
 
 And this is what is rendered in our DOM:
 ```html
-<svg data-v-92245bab="" data-v-7a7a37b1="" class="icon info" width="48" height="48" data-test="test" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"><use data-v-92245bab="" href="#icon-instagram"></use></svg>
+<svg data-v-92245bab="" data-v-7a7a37b1="" class="icon info" width="48" height="48" data-test="test" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+  <use data-v-92245bab="" href="#icon-instagram"></use>
+</svg>
 ```
 
-As I mentioned, our SVG sprite can be injected or written into the DOM. Which brings us to our last step:
+Notice the `data-` attribute? It does nothing here but I wanted to illustrate how we can pass valid attributes directly to our Svg Element. And as I mentioned, our SVG sprite can be injected or written into the DOM. Which brings us to our last step:
 
 ### Injecting our sprite to our DOM
 
-Our designer currently exports SVGs into their own files inside a particular directory. We'll need an intermediary step to generate the sprite file, which is out of scope for this post. Ultimately, we will end up with a `sprite.svg` file in our `public` directory of our app. So that let's us access it programatically and append it to our DOM using the power of composables.
+Our designer currently exports SVGs into their own files inside a particular directory. We'll need an intermediary step to generate the sprite file, which is out of scope for this post. Ultimately, we will end up with a `sprite.svg` file in our `public` directory of our app. So that let's us access it programmatically and append it to our DOM using the power of composables.
 
 **useSvgLoader.ts**
 
@@ -360,7 +362,7 @@ I used a singleton pattern for loading and managing an SVG sprite container. The
 
 You may be wondering about this part here: `document.body.appendChild(svgElement);` as Vue really frowns on this. In this case, however, we are appending directly to the `body` element, which is outside our app's root element, and therefore not under its jurisdiction or part of the Shadow DOM.
 
-Another point to note is that when adding the aria attributes to the sprite assumes the icons are decorative. If an icon needs to convey meaning independently, consumers could pass an `aria-label` or any other valid HTML attributes like normal (see the example usage above).
+Another point to note is that when adding the aria attributes to the sprite, it assumes the icons are decorative. If an icon needs to convey meaning independently, consumers could pass an `aria-label` or any other valid HTML attributes like normal (see the example usage above).
 
 And last, the composable should be invoked at the top layer of the app, in our case, it's the main layout component. This ensures the sprite is loaded early in the application lifecycle.
 
@@ -372,7 +374,7 @@ Navigating the transition away from Fort Awesome forced us to deeply consider th
 
 As detailed, we weighed the pros and cons of embedding SVGs in CSS versus leveraging SVG sprites. While the CSS approach offered initial simplicity, the SVG sprite method ultimately won out due to its significant advantages in caching performance, accessibility compliance, styling flexibility, and long-term scalability and maintainability – aligning perfectly with the goals I set out. The implementation, centered around the `BaseIcon` component and the `useSvgLoader` composable, provides a developer-friendly API while handling the complexities of sprite injection efficiently.
 
-This process was a significant learning experience for me, marking a key step in contributing to our design system's architecture. This wasn’t just an icon migration — it was a turning point in how we think about design systems, developer experience, and sustainable architecture. SVG sprites gave us a scalable, accessible, and elegant foundation — and building it helped me grow as a UI architect.
+This process was a significant learning experience for me, marking a key step in contributing to our design system's architecture. This wasn’t just an icon migration — it was a turning point in how we think about design systems, developer experience, and sustainable architecture - a first for our team. SVG sprites gave us a scalable, accessible, and elegant foundation — and building it helped me grow as a UI architect.
 
 What are your experiences with icon management? Have you used SVG sprites, or do you prefer a different method? I'd love to hear your thoughts, questions, or alternative solutions. email me at drinkhorchata [at] duck.com or bluesky @alexrdz.bsky.social
 
