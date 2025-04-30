@@ -34,6 +34,7 @@ const docsCollection = defineCollection({
     title: z.string(),
     category: z.enum([
       'vue-idioms',
+      'ai-ml',
       'tooling',
       'testing',
       'refactoring',
@@ -50,6 +51,7 @@ const docsCollection = defineCollection({
 });
 
 export const collections = {
+  'ai-ml': docsCollection,
   'mindset': docsCollection,
   'refactoring': docsCollection,
   'vue-idioms': docsCollection,

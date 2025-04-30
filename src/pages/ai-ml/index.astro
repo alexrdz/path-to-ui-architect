@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+
+const posts = await getCollection('ai-ml');
+---
+
+<MainLayout title="AI/ML">
+  <h1>AI/ML</h1>
+  <ArticleList posts={posts} collectionName="ai-ml" />
+</MainLayout>
