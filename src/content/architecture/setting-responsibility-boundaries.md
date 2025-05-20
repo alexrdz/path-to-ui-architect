@@ -82,10 +82,6 @@ We'll start with understanding what the component is meant to do and what it is 
 
 so... it looks like the handleSubmit function is doing some of the [orchestration](/mindset/glossary#orchestration). however, it should only concern itself with handling the submission. i think we can extract the setState functions (setLoading, setError, setSuccess). and while its job is to handle submissions, it should do so by proxy meaning it should call a service, not handle the fetch itself. and because it is named handleSubmit it probably shouldn't handle the setComment or succes, etc. either. the return or rendering portion seems fine to me.
 
-
-"Because it's called handleSubmit, it shouldn't manage comment reset or setSuccess."
-That’s a fantastic naming/code alignment insight. You’re thinking in contracts now.
-
 If it’s called handleSubmit, it should:
 
 Accept the submission intent
